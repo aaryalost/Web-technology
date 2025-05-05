@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<company>
+    <employee id="1">
+        <name>Aarya Hulwan</name>
+        <age>22</age>
+        <department>Engineering</department>
+        <salary>75000</salary>
+    </employee>
+    <employee id="2">
+        <name>Kanaka Sharma</name>
+        <age>23</age>
+        <department>HR</department>
+        <salary>65000</salary>
+    </employee>
+    <employee id="3">
+        <name>Rahul Desai</name>
+        <age>28</age>
+        <department>Marketing</department>
+        <salary>72000</salary>
+    </employee>
+</company>

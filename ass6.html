@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Increasing Font Size</title>
+  <style>
+    #text {
+      color: blue;
+      font-size: 10px;
+      transition: font-size 0.1s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <p id="text">Watch me grow!</p>
+
+  <script>
+    let size = 10; 
+    const text = document.getElementById("text");
+
+    setInterval(() => {
+      size += 2; 
+      text.style.fontSize = size + "px";
+    }, 100); 
+  </script>
+
+</body>
+</html>

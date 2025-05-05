@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Random Quote Generator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f8ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .quote-box {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      max-width: 500px;
+      text-align: center;
+    }
+    .quote {
+      font-size: 22px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    .author {
+      font-size: 18px;
+      color: #777;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    const quotes = [
+      { text: "The best way to get started is to quit talking and begin doing.", author: "Walt Disney" },
+      { text: "Success is not in what you have, but who you are.", author: "Bo Bennett" },
+      { text: "Opportunities don't happen. You create them.", author: "Chris Grosser" },
+      { text: "Don't let yesterday take up too much of today.", author: "Will Rogers" },
+      { text: "It always seems impossible until it's done.", author: "Nelson Mandela" },
+    ];
+
+    function App() {
+      const [quote, setQuote] = useState(quotes[0]);
+
+      const getRandomQuote = () => {
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        setQuote(quotes[randomIndex]);
+      };
+
+      return (
+        <div className="quote-box">
+          <div className="quote">"{quote.text}"</div>
+          <div className="author">- {quote.author}</div>
+          <button onClick={getRandomQuote}>New Quote</button>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+
+</body>
+</html>
