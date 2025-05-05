@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html>
+<body>
+
+          <?php
+          class Student {
+              public $name, $age, $marks, $cgpa;
+              function __construct($name, $age, $marks, $cgpa) {
+                  $this->name = $name;
+                  $this->age = $age;
+                  $this->marks = $marks;
+                  $this->cgpa = $cgpa;
+              }
+              function display() {
+                  echo "Name: $this->name, Age: $this->age, Marks: $this->marks, CGPA: $this->cgpa<br>";
+              }
+          }
+          $stud = new Student("Aarya", 21, 450, 9.1);
+          $stud->display();
+
+          class Counter {
+              public static $count = 0;
+              public static function increment() {
+                  return ++self::$count;
+              }
+          }
+          echo "Counter: " . Counter::increment() . "<br>";
+
+          interface Greet {
+              public function sayHello();
+          }
+          class EnglishGreeting implements Greet {
+              public function sayHello() {
+                  echo "Hello!<br>";
+              }
+          }
+          $g = new EnglishGreeting();
+          $g->sayHello();
+
+          class Vehicle {
+              public $brand = "Honda";
+          }
+          class Car extends Vehicle {
+              public $model = "City";
+          }
+          $c = new Car();
+          echo "Brand: $c->brand, Model: $c->model<br>";
+
+          abstract class Animal {
+              abstract public function sound();
+          }
+          class Dog extends Animal {
+              public function sound() {
+                  echo "Bark<br>";
+              }
+          }
+          $d = new Dog();
+          $d->sound();
+
+          class Shape {
+              function area() {
+                  echo "Calculating Area<br>";
+              }
+          }
+          class Square extends Shape {
+              function area() {
+                  echo "Area = side * side<br>";
+              }
+          }
+          $sq = new Square();
+          $sq->area();
+          ?>
+
+</body>
+</html>

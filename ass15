@@ -1,0 +1,71 @@
+<?php
+$host = "localhost";
+$user = "root";
+$password = "Patya@9322";
+$dbname = "student_db";
+
+$conn = new mysqli($host, $user, $password, $dbname);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $course = $_POST["course"];
+
+    if (isset($_POST["update_id"])) {
+        // Update record
+        $id = $_POST["update_id"];
+        $conn->query("UPDATE students SET name='$name', email='$email', course='$course' WHERE id=$id");
+        echo "<p style='color: green;'>✅ Record updated successfully.</p>";
+    } else {
+        // Insert record
+        $conn->query("INSERT INTO students (name, email, course) VALUES ('$name', '$email', '$course')");
+        echo "<p style='color: green;'>✅ Student added successfully.</p>";
+    }
+}
+
+// Get record for edit
+$editData = null;
+if (isset($_GET["edit"])) {
+    $id = $_GET["edit"];
+    $result = $conn->query("SELECT * FROM students WHERE id=$id");
+    $editData = $result->fetch_assoc();
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student CRUD (Single File)</title>
+</head>
+<body>
+    <h2><?php echo $editData ? "Update Student" : "Add Student"; ?></h2>
+
+    <form method="POST" action="">
+        <input type="hidden" name="update_id" value="<?php echo $editData['id'] ?? ''; ?>">
+        Name: <input type="text" name="name" value="<?php echo $editData['name'] ?? ''; ?>" required><br><br>
+        Email: <input type="email" name="email" value="<?php echo $editData['email'] ?? ''; ?>" required><br><br>
+        Course: <input type="text" name="course" value="<?php echo $editData['course'] ?? ''; ?>" required><br><br>
+        <input type="submit" value="<?php echo $editData ? 'Update' : 'Add'; ?>">
+    </form>
+
+    <h2>Student Records</h2>
+    <table border="1" cellpadding="10">
+        <tr><th>ID</th><th>Name</th><th>Email</th><th>Course</th><th>Action</th></tr>
+        <?php
+        $result = $conn->query("SELECT * FROM students");
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>
+                <td>{$row['id']}</td>
+                <td>{$row['name']}</td>
+                <td>{$row['email']}</td>
+                <td>{$row['course']}</td>
+                <td><a href='?edit={$row['id']}'>Edit</a></td>
+            </tr>";
+        }
+        ?>
+    </table>
+</body>
+</html>
